@@ -1,0 +1,41 @@
+easy_admin:
+    site_name: 'Gestion de Mon super Blog'
+    show:
+        max_results: 15
+    design:
+        form_theme:
+            - "@EasyAdmin/Form/bootstrap_4.html.twig"
+            - "@FOSCKEditor/Form/ckeditor_widget.html.twig"
+        menu:
+            - label: 'Blog'
+              icon: 'newspaper-o'
+              children: 
+                  - {entity: 'Article', icon: 'book', label: 'Articles'}
+                  - {entity: 'Category', icon: 'tag', label: 'Categories'}
+                  - {entity: 'Comment', icon: 'newspaper-o', label: 'Commentaires'}
+
+            - label: 'Users'
+              icon: 'newspaper-o'
+              children: 
+                  - {entity: 'User', icon: 'user', label: 'Utilisateurs'}
+    entities:
+        Article:
+            class: App\Entity\Article
+            show:
+                max_results: 10
+            form:
+                fields:
+                      - 'title'
+                      - 'category'
+                      - {property: 'content', type: 'fos_ckeditor'}
+                      - 'image'
+                      - 'createdAt'
+                      
+        Category:
+            class: App\Entity\Category
+        Comment:
+            class: App\Entity\Comment
+            show:
+                max_results: 10
+        User:
+            class: App\Entity\User

@@ -1,0 +1,5 @@
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yaml"
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index

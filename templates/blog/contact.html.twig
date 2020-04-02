@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('message') %}
+        <div class="alert alert-success" role="alertdialog">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="col-12">
+        <h1>Nous contacter</h1>
+        {{ form_start(formContact) }}
+
+        {{ form_row(formContact.name, {'label':'Votre nom','attr':{'placeholder': "Enter nom..."}}) }}
+        {{ form_row(formContact.email, {'attr':{'placeholder': "Enter email..."}}) }}
+        {{ form_row(formContact.content, {'attr':{'placeholder': "Enter message..."}}) }}
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+
+        
+        {{ form_end(formContact) }}
+    </div>
+{% endblock %}

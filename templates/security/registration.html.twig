@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+    {{ form_row(form.username, {'attr': {'placeholder': "Username"}}) }}
+    {{ form_row(form.email, {'attr': {'placeholder': "Emain"}}) }}
+    {{ form_row(form.password, {'attr': {'placeholder': "Password"}}) }}
+    {{ form_row(form.confirm_password, {'label': 'Confirm Password','attr': {'placeholder': "Confirm Password"}}) }}
+
+    <button type="submit" class="btn btn-success">Inscription</button>
+    
+{{ form_end(form) }}
+
+{% endblock %}

@@ -1,0 +1,3 @@
+
+select#langChoise option[value="fr_FR"] { background-image:url(en.png); }
+select#langChoise option[value="en_EN"] { background-image:url(en.png); }

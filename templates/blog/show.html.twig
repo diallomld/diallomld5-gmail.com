@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %}Article!{% endblock %}
+{% block body %}
+
+    <h1>{{ article.title }}</h1>
+     <p> 
+        Ecrit le {{ article.createdAt | date('d/m/yy') }} à {{ article.createdAt | date('h:i') }}
+        dans la catéorie <b> {{article.category.title}} </b> 
+    </p>
+    <p>
+        <img src="{{ article.image }}">
+    </p>
+    <p> 
+        {{ article.content | raw }}
+    </p>
+
+    <section class="comment">
+        <h1>{{ article.comments | length }} Commentaire(s)</h1>
+
+        {% for comment in article.comments %}
+
+        <div class="row">
+            <div class="col-3">
+                <b> {{ comment.author }} :</b> Le <i> {{ comment.createdAt | date('d/m/y à m:s') }} </i>
+            </div>
+            <div class="col-9">
+                {{ comment.content | raw }}
+            </div>
+        </div>
+
+        {% endfor %}
+            
+    </section>
+    <section><br><br>
+        <div class="col-12">
+            {% if app.user %}
+
+            {{ form_start(commentFom) }}
+
+                {{ form_row(commentFom.author, {'attr': {'placeholder': "votre nom..."}}) }}
+                {{ form_row(commentFom.content, {'attr': {'placeholder': "comment..."}}) }}
+                
+                <button type="submit" class="btn btn-success">Commenter</button>
+            
+            {{ form_end(commentFom) }}
+            {% else %}
+            <p><h3>Veuillez vous connecter pour poster un commentaire</h3></p><br>
+            <p>
+                <a href="{{path('security_login')}}" class="btn btn-primary">Connexion</a>
+            </p>
+            {% endif %}
+    
+        </div>
+    </section>
+
+
+{% endblock %}

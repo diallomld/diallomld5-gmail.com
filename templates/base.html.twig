@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{ path('home') }}">Mon Blog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('blog') }}">Articles <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if not app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                        </li>
+                    {% else %}
+                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('blog_new') }}">Creer un article</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('security_logout') }}">Deconnexion</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('blog_contact') }}">Contactez-nous</a>
+                    </li>
+                    <li class="nav-item">          
+                        <p class="nav-link">{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                        Connecté en tant que {{ app.user.username }}
+                        {% endif %}</p>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+        <script src="{{ asset('build/app.js') }}"></script>
+            {% block javascripts %}{% endblock %}
+    </body>
+</html>
